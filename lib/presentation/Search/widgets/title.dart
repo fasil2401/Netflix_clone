@@ -16,3 +16,5 @@ class SearchTextTitle extends StatelessWidget {
     );
   }
 }
+
+

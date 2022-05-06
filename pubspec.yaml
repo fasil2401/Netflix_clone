@@ -38,7 +38,10 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   freezed: ^2.0.2
-  
+  scrollable_list_tabview:
+    git:
+      url: https://github.com/aswanath/scrollable_list_tabview_custom.git
+      ref: master 
   json_annotation: ^4.5.0
   http: ^0.13.4
 
