@@ -5,8 +5,10 @@ import 'package:netflix_demo/core/constants.dart';
 import 'package:netflix_demo/presentation/Home/widgets/main_background_card.dart';
 import 'package:netflix_demo/presentation/Home/widgets/number_card.dart';
 import 'package:netflix_demo/presentation/Widgets/main_title.dart';
+import 'package:netflix_demo/services/constants.dart';
 
 import '../Widgets/main_card.dart';
+import '../Widgets/main_page_drop.dart';
 import 'widgets/custom_button_widget.dart';
 import 'widgets/main_title_card.dart';
 import 'widgets/number_title_card.dart';
@@ -36,31 +38,35 @@ class ScreenHome extends StatelessWidget {
               child: Stack(
                 children: [
                   ListView(
-                    children: const [
+                    children:  [
                       MainBackground(),
                       MainTitleCard(
+                        api: Constants.topRated,
                         title: 'Released in Past year',
                       ),
                       setHeight,
                       MainTitleCard(
+                        api: Constants.continueWatching,
                         title: 'Trending Now',
                       ),
                       setHeight,
                       NumberTitleCard(),
                       setHeight,
                       MainTitleCard(
+                        api: Constants.netflix,
                         title: 'Tense Dramas',
                       ),
                       setHeight,
                       MainTitleCard(
+                        api: Constants.topIndia,
                         title: 'South indian movies',
                       )
                     ],
                   ),
                   scrollNotifier.value
                       ? AnimatedContainer(
-                        duration: const Duration(microseconds: 1000),
-                        child: Container(
+                          duration: const Duration(microseconds: 1000),
+                          child: Container(
                             width: double.infinity,
                             height: 95,
                             color: Colors.black.withOpacity(0.3),
@@ -91,22 +97,49 @@ class ScreenHome extends StatelessWidget {
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
-                                  children:  [
-                                   const Text('TV Shows', style: HomeTopTextStyle),
-                                  const  Text('Movies', style: HomeTopTextStyle),
-                                    Row(
-                                      children:const [
-                                        Text('Categories', style: HomeTopTextStyle),
-                                        Icon(Icons.arrow_drop_down,
-                                        color: textwhitecolor,)
-                                      ],
+                                  children: [
+                                    const Text('TV Shows',
+                                        style: HomeTopTextStyle),
+                                    GestureDetector(
+                                      onTap: () {
+                                        showDialog(
+                                            context: context,
+                                            builder: (context) {
+                                              return ListViewCustom(
+                                                isCategory: false,
+                                              );
+                                            });
+                                      },
+                                      child: const Text('Movies',
+                                          style: HomeTopTextStyle),
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        showDialog(
+                                            context: context,
+                                            builder: (context) {
+                                              return ListViewCustom(
+                                                isCategory: true,
+                                              );
+                                            });
+                                      },
+                                      child: Row(
+                                        children: const [
+                                          Text('Categories',
+                                              style: HomeTopTextStyle),
+                                          Icon(
+                                            Icons.arrow_drop_down,
+                                            color: textwhitecolor,
+                                          )
+                                        ],
+                                      ),
                                     ),
                                   ],
                                 )
                               ],
                             ),
                           ),
-                      )
+                        )
                       : setHeight,
                 ],
               ),

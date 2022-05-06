@@ -1,15 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:netflix_demo/services/constants.dart';
+import 'package:netflix_demo/services/http_service.dart';
 
 import '../../core/constants.dart';
 
 class MainCard extends StatelessWidget {
-  const MainCard({
+  final String api;
+  final int index;
+   MainCard({
     Key? key,
-  }) : super(key: key);
+    required this.index,
+    required this.api
 
+  }) : super(key: key);
+HttpServices http = HttpServices();
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return FutureBuilder(
+      future: http.getTopRated(api),
+      builder: (BuildContext context, AsyncSnapshot<dynamic>snapshot){
+        if (snapshot.hasData) {
+          return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
         // height: 250,
@@ -17,11 +28,17 @@ class MainCard extends StatelessWidget {
         margin: EdgeInsets.symmetric(horizontal: 10),
         decoration: BoxDecoration(
             borderRadius: radius10,
-            image:const DecorationImage(
+            image: DecorationImage(
                 fit: BoxFit.cover,
                 image: NetworkImage(
-                    'https://www.wellgousa.com/sites/default/files/styles/key_art_poster/public/2019-05/812x1200.jpg?itok=P8Q567bg'))),
+                    '${Constants.imageId}${snapshot.data[index].image}'))),
       ),
     );
+          
+        }else {
+          return Container();
+        }
+      }
+      );
   }
 }

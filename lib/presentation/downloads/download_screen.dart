@@ -5,6 +5,10 @@ import 'package:netflix_demo/core/colors/colors.dart';
 import 'package:netflix_demo/core/constants.dart';
 import 'package:netflix_demo/presentation/Widgets/app_bar_widget.dart';
 
+import '../../services/constants.dart';
+import '../../services/http_service.dart';
+import 'widgets/downloads_image.dart';
+
 class ScreenDownloads extends StatelessWidget {
   ScreenDownloads({Key? key}) : super(key: key);
   final _widgetList = [const _SmartDownloads(), Section2(), const Section3()];
@@ -18,9 +22,11 @@ class ScreenDownloads extends StatelessWidget {
               title: 'Downloads',
             ))),
         body: ListView.separated(
-            padding:const EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             itemBuilder: (ctx, index) => _widgetList[index],
-            separatorBuilder: (ctx, index) =>const SizedBox(height: 25,),
+            separatorBuilder: (ctx, index) => const SizedBox(
+                  height: 25,
+                ),
             itemCount: _widgetList.length));
   }
 }
@@ -48,11 +54,6 @@ class _SmartDownloads extends StatelessWidget {
 
 class Section2 extends StatelessWidget {
   Section2({Key? key}) : super(key: key);
-  final List _imageLIst = [
-    'https://assets.mubicdn.net/images/notebook/post_images/19890/images-w1400.jpg?1449150134',
-    'https://assets.mubicdn.net/images/notebook/post_images/19893/images-w1400.jpg?1449196747',
-    'https://assets.mubicdn.net/images/notebook/post_images/19891/images-w1400.jpg?1449152277',
-  ];
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -73,33 +74,41 @@ class Section2 extends StatelessWidget {
         SizedBox(
           width: size.width,
           height: size.width,
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              CircleAvatar(
-                radius: size.width * 0.4,
-                backgroundColor: Colors.grey.withOpacity(0.5),
-              ),
-              DownloadsImageWidget(
-                image: _imageLIst[0],
-                margin: const EdgeInsets.only(left: 130, bottom: 50),
-                angle: 20,
-                size: Size(size.width * 0.4, size.width * 0.58),
-              ),
-              DownloadsImageWidget(
-                image: _imageLIst[1],
-                margin: const EdgeInsets.only(right: 130, bottom: 50),
-                angle: -20,
-                size: Size(size.width * 0.4, size.width * 0.58),
-              ),
-              DownloadsImageWidget(
-                image: _imageLIst[2],
-                margin: const EdgeInsets.only(bottom: 10),
-                size: Size(size.width * 0.45, size.width * 0.65),
-                radius: 8,
-              )
-            ],
-          ),
+          child: FutureBuilder(
+              future: HttpServices().getTopRated(Constants.topRated),
+              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                if (snapshot.hasData) {
+                  return Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      CircleAvatar(
+                        radius: size.width * 0.4,
+                        backgroundColor: Colors.grey.withOpacity(0.5),
+                      ),
+                      DownloadsImageWidget(
+                        image: snapshot.data[9].image,
+                        margin: const EdgeInsets.only(left: 130, bottom: 50),
+                        angle: 20,
+                        size: Size(size.width * 0.4, size.width * 0.58),
+                      ),
+                      DownloadsImageWidget(
+                        image: snapshot.data[4].image,
+                        margin: const EdgeInsets.only(right: 130, bottom: 50),
+                        angle: -20,
+                        size: Size(size.width * 0.4, size.width * 0.58),
+                      ),
+                      DownloadsImageWidget(
+                        image: snapshot.data[6].image,
+                        margin: const EdgeInsets.only(bottom: 10),
+                        size: Size(size.width * 0.45, size.width * 0.65),
+                        radius: 8,
+                      )
+                    ],
+                  );
+                } else {
+                  return Container();
+                }
+              }),
         ),
       ],
     );
@@ -154,39 +163,6 @@ class Section3 extends StatelessWidget {
           ),
         )
       ],
-    );
-  }
-}
-
-class DownloadsImageWidget extends StatelessWidget {
-  const DownloadsImageWidget({
-    Key? key,
-    required this.image,
-    required this.margin,
-    this.angle = 0,
-    required this.size,
-    this.radius = 8,
-  }) : super(key: key);
-
-  final String image;
-  final EdgeInsets margin;
-  final double angle;
-  final Size size;
-  final double radius;
-
-  @override
-  Widget build(BuildContext context) {
-    return Transform.rotate(
-      angle: angle * pi / 180,
-      child: Container(
-        margin: margin,
-        width: size.width,
-        height: size.height,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(radius),
-            image:
-                DecorationImage(fit: BoxFit.cover, image: NetworkImage(image))),
-      ),
     );
   }
 }
