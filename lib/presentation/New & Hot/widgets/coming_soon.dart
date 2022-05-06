@@ -7,8 +7,22 @@ import 'video_widget.dart';
 
 
 class ComingSoonWidget extends StatelessWidget {
-  const ComingSoonWidget({
+
+  final String movie;
+  final String moviedisc;
+  final String month;
+  final String day;
+  final String comingsoon;
+  final String image;
+
+   ComingSoonWidget({
     Key? key,
+    required this.movie,
+    required this.comingsoon,
+    required this.month,
+    required this.image,
+    required this.day,
+    required this.moviedisc,
     required this.screenSize,
   }) : super(key: key);
 
@@ -23,14 +37,14 @@ class ComingSoonWidget extends StatelessWidget {
           height: 450,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
-            children: const [
+            children:  [
               Text(
-                'FEB',
-                style: TextStyle(fontSize: 16, color: Colors.grey),
+                month,
+                style:const TextStyle(fontSize: 16, color: Colors.grey),
               ),
               Text(
-                '11',
-                style: TextStyle(
+                day,
+                style:const TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
                     letterSpacing: 5),
@@ -44,24 +58,28 @@ class ComingSoonWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-             const VideoWidget(),
+              VideoWidget(image: image,),
               setHeight,
               Row(
-                children: const [
-                  Text(
-                    'TALL GIRL 2',
-                    style: TextStyle(
-                        fontSize: 35, fontWeight: FontWeight.bold),
+                children:  [
+                  SizedBox(
+                    width: screenSize.width * 0.6,
+                    child: Text(
+                      movie,
+                      overflow: TextOverflow.ellipsis,
+                      style:const TextStyle(
+                          fontSize: 35, fontWeight: FontWeight.bold),
+                    ),
                   ),
-                  Spacer(),
-                  CustomButtonWidget(
+                 const Spacer(),
+                 const CustomButtonWidget(
                     icon: Icons.notifications_outlined,
                     title: 'Remind me',
                     iconSize: 20,
                     textSize: 12,
                   ),
                   setWIdth,
-                  CustomButtonWidget(
+                 const CustomButtonWidget(
                     icon: Icons.info_outlined,
                     title: 'Info',
                     iconSize: 20,
@@ -71,17 +89,18 @@ class ComingSoonWidget extends StatelessWidget {
                 ],
               ),
               setHeight,
-              const Text('COming on Friday'),
+               Text(comingsoon),
               setHeight,
-              const Text(
-                'Tall Girl 2',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+               Text(
+                movie,
+                style:const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ),
               setHeight,
-              const Text(
+               Text(
                 
-                  '1960s Turkey countryside. A newly assigned teacher finds out that the solitary village is missing a school. He gets fond of the village people and especially a disabled man. The teacher helps the village to build a new school and educate the children and the disabled man.',
-                  style: TextStyle(color: Colors.grey ),)
+                  moviedisc,
+                  maxLines: 5,
+                  style:const TextStyle(color: Colors.grey ),)
             ],
           ),
         )
