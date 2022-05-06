@@ -40,24 +40,24 @@ class ScreenHome extends StatelessWidget {
                   ListView(
                     children:  [
                       MainBackground(),
-                      MainTitleCard(
+                     const MainTitleCard(
                         api: Constants.topRated,
                         title: 'Released in Past year',
                       ),
                       setHeight,
-                      MainTitleCard(
+                     const MainTitleCard(
                         api: Constants.continueWatching,
                         title: 'Trending Now',
                       ),
                       setHeight,
-                      NumberTitleCard(),
+                      NumberTitleCard(api: Constants.top10,),
                       setHeight,
-                      MainTitleCard(
+                    const  MainTitleCard(
                         api: Constants.netflix,
                         title: 'Tense Dramas',
                       ),
                       setHeight,
-                      MainTitleCard(
+                     const MainTitleCard(
                         api: Constants.topIndia,
                         title: 'South indian movies',
                       )

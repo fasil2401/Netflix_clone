@@ -5,8 +5,9 @@ import '../../Widgets/main_title.dart';
 import 'number_card.dart';
 
 class NumberTitleCard extends StatelessWidget {
-  const NumberTitleCard({
-    Key? key,
+  final String api;
+   NumberTitleCard({
+    Key? key, required this.api
   }) : super(key: key);
 
   @override
@@ -21,7 +22,7 @@ class NumberTitleCard extends StatelessWidget {
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: List.generate(10, (index) {
-              return  NumberCard(index: index,);
+              return  NumberCard(index: index,api: api,);
             }),
           ),
         )
