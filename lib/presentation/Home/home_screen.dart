@@ -40,6 +40,9 @@ class ScreenHome extends StatelessWidget {
                   ListView(
                     children:  [
                       MainBackground(),
+
+
+                      
                      const MainTitleCard(
                         api: Constants.topRated,
                         title: 'Released in Past year',

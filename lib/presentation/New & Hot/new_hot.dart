@@ -218,11 +218,6 @@ class ScreenNewAndHot extends StatelessWidget {
     );
   }
 
-  _buildTabView(String name) {
-    return Center(
-      child: Text(name),
-    );
-  }
 
   // Widget _buildComingSoon(BuildContext context) {
   //   final screenSize = MediaQuery.of(context).size;
