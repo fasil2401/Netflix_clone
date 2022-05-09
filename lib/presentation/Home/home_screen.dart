@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:netflix_demo/core/colors/colors.dart';
 import 'package:netflix_demo/core/constants.dart';
 import 'package:netflix_demo/presentation/Home/widgets/main_background_card.dart';
+import 'package:netflix_demo/presentation/Home/widgets/main_stack.dart';
 import 'package:netflix_demo/presentation/Home/widgets/number_card.dart';
 import 'package:netflix_demo/presentation/Widgets/main_title.dart';
 import 'package:netflix_demo/services/constants.dart';
@@ -41,7 +42,9 @@ class ScreenHome extends StatelessWidget {
                     children:  [
                       MainBackground(),
 
-
+                    const MainStack(
+                      title: 'Continue Watching', 
+                      api: Constants.netflix),
                       
                      const MainTitleCard(
                         api: Constants.topRated,

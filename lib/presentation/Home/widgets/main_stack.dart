@@ -7,10 +7,10 @@ import '../../Widgets/main_card.dart';
 import '../../Widgets/main_title.dart';
 
 
-class MainTitleCard extends StatelessWidget {
+class MainStack extends StatelessWidget {
   final String title;
   final String api;
-  const MainTitleCard({
+  const MainStack({
     Key? key,required this.title,required this.api
   }) : super(key: key);
 
@@ -26,7 +26,7 @@ class MainTitleCard extends StatelessWidget {
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: List.generate(10, (index) {
-              return MainCard(index: index,api: api,);
+              return MainStackCard(index: index,api: api,);
             }),
           ),
         )
