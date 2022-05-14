@@ -41,7 +41,7 @@ class TopSearchItemTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     return FutureBuilder(
-        future: HttpServices().getUpcoming(Constants.upComing),
+        future: HttpServices().getUpcoming(Constants.top10),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.hasData) {
             return Row(

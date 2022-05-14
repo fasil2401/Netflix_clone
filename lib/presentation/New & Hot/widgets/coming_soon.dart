@@ -27,7 +27,7 @@ class ComingSoonWidget extends StatelessWidget {
   }) : super(key: key);
 
   final Size screenSize;
-
+    
   @override
   Widget build(BuildContext context) {
     return Row(

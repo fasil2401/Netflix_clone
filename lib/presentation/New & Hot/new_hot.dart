@@ -72,6 +72,7 @@ class ScreenNewAndHot extends StatelessWidget {
       // ),
 
       body: ScrollableListTabView(
+        
         tabs: [
           ScrollableListTab(
             tab: ListTab(
@@ -81,12 +82,12 @@ class ScreenNewAndHot extends StatelessWidget {
               label: "🍿  Coming soon",
             ),
             body: CustomScrollView(
-                physics: NeverScrollableScrollPhysics(),
+                physics:const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 slivers: [
                   SliverToBoxAdapter(
                     child: FutureBuilder(
-                        future: HttpServices().getUpcoming(Constants.upComing),
+                        future: HttpServices().getUpcoming(Constants.topRated),
                         builder: (BuildContext context,
                             AsyncSnapshot<dynamic> snapshot) {
                           if (snapshot.hasData) {
@@ -134,12 +135,12 @@ class ScreenNewAndHot extends StatelessWidget {
               label: "👀 Everyone's Watching",
             ),
             body: CustomScrollView(
-                physics: NeverScrollableScrollPhysics(),
+                physics:const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 slivers: [
                   SliverToBoxAdapter(
                     child: FutureBuilder(
-                        future: HttpServices().getUpcoming(Constants.upComing),
+                        future: HttpServices().getUpcoming(Constants.topRated),
                         builder: (BuildContext context,
                             AsyncSnapshot<dynamic> snapshot) {
                           if (snapshot.hasData) {
@@ -171,12 +172,12 @@ class ScreenNewAndHot extends StatelessWidget {
               label: "Top 10",
             ),
             body: CustomScrollView(
-                physics: NeverScrollableScrollPhysics(),
+                physics:const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 slivers: [
                   SliverToBoxAdapter(
                     child: FutureBuilder(
-                        future: HttpServices().getUpcoming(Constants.upComing),
+                        future: HttpServices().getUpcoming(Constants.topRated),
                         builder: (BuildContext context,
                             AsyncSnapshot<dynamic> snapshot) {
                           if (snapshot.hasData) {
