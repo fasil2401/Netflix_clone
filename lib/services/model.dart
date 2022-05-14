@@ -32,3 +32,23 @@ class UpComing {
   }
 
 }
+class AllMovies {
+  final String title;
+  final String overview;
+  final String image;
+  final String date;
+
+  AllMovies(
+      {required this.title,
+      required this.overview,
+      required this.image,
+      required this.date});
+
+  factory AllMovies.fromJson(Map<String, dynamic> json) {
+    return AllMovies(
+        title: json['title'] as String,
+        overview: json['overview'] as String,
+        image: json['backdrop_path'] as String,
+        date: json['release_date'] as String);
+  }
+}
